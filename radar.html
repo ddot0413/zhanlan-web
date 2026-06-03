@@ -632,16 +632,16 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
 </script>
 <script>
 var SC={
-  arch1:{plan:3,expr:3,under:4,creat:3,act:4},
-  arch2:{plan:4,expr:2,under:2,creat:4,act:3},
-  arch3:{plan:4,expr:4,under:3,creat:3,act:4},
-  sci1: {plan:2,expr:3,under:4,creat:4,act:3},
-  sci2: {plan:4,expr:3,under:4,creat:3,act:3},
-  sci3: {plan:3,expr:4,under:3,creat:4,act:3},
-  grow1:{plan:4,expr:4,under:3,creat:3,act:4},
-  grow2:{plan:3,expr:4,under:4,creat:3,act:3},
-  grow3:{plan:4,expr:3,under:3,creat:2,act:4},
-  grow4:{plan:3,expr:3,under:4,creat:3,act:4}
+  arch1:{plan:3,expr:2,under:4,creat:2,act:5},
+  arch2:{plan:5,expr:1,under:2,creat:5,act:3},
+  arch3:{plan:4,expr:5,under:2,creat:2,act:5},
+  sci1: {plan:1,expr:3,under:5,creat:5,act:3},
+  sci2: {plan:4,expr:1,under:5,creat:3,act:3},
+  sci3: {plan:2,expr:4,under:3,creat:5,act:3},
+  grow1:{plan:5,expr:5,under:2,creat:3,act:4},
+  grow2:{plan:2,expr:5,under:5,creat:2,act:3},
+  grow3:{plan:5,expr:2,under:3,creat:1,act:5},
+  grow4:{plan:3,expr:3,under:4,creat:2,act:5}
 };
 var NM={
   arch1:"結構力學篇",arch2:"空間規劃篇",arch3:"建造房子篇",
@@ -769,11 +769,8 @@ function render(){
   var panelId="panel-"+curSchool+"-"+curLv;
   var totalCamps=document.getElementById(panelId)?document.getElementById(panelId).querySelectorAll(".camp-row").length:8;
   var maxScore=totalCamps*4;
-  var BASE=30;
   var pct={};
-  KS.forEach(function(k){
-    var ratio=Math.min(1,tot[k]/maxScore);
-    pct[k]=Math.round(BASE+(100-BASE)*ratio);
+  KS.forEach(function(k){pct[k]=Math.min(100,Math.round(tot[k]/(ids.length*5)*100));});
   });
 
   if(!myChart){
