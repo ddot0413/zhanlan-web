@@ -36,8 +36,12 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
 .lv-tabs{display:flex;gap:8px;margin-bottom:16px}
 .ltab{flex:1;padding:9px 8px;border-radius:10px;border:2px solid var(--border);background:white;
   font-size:12px;font-weight:700;cursor:pointer;font-family:"Noto Sans TC",sans-serif;
-  color:var(--muted);text-align:center;transition:all .2s;-webkit-tap-highlight-color:transparent}
+  color:var(--muted);text-align:center;transition:all .2s;-webkit-tap-highlight-color:transparent;position:relative}
 .ltab.on{background:var(--blue2);color:white;border-color:var(--blue2)}
+.ltab-count{position:absolute;top:-6px;right:-6px;background:var(--orange);color:white;
+  font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;
+  display:none;align-items:center;justify-content:center;line-height:1}
+.ltab-count.show{display:flex}
 
 /* CAMP LIST */
 .camp-panel{display:none}
@@ -170,15 +174,21 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
 
     <!-- 班別 Tab -->
     <div class="lv-tabs">
-      <button class="ltab on" id="lb-basic" onclick="selLv('basic',this)">基礎班<br><span style="font-size:10px;opacity:.8;font-weight:400">升小一～升小三</span></button>
-      <button class="ltab"    id="lb-adv"   onclick="selLv('adv',this)">進階班<br><span style="font-size:10px;opacity:.8;font-weight:400">升小三～升小六</span></button>
+      <button class="ltab on" id="lb-basic" onclick="toggleLv('basic',this)">
+        <span class="ltab-count" id="cnt-basic">0</span>
+        基礎班<br><span style="font-size:10px;opacity:.8;font-weight:400">升小一～升小三</span>
+      </button>
+      <button class="ltab" id="lb-adv" onclick="toggleLv('adv',this)">
+        <span class="ltab-count" id="cnt-adv">0</span>
+        進階班<br><span style="font-size:10px;opacity:.8;font-weight:400">升小三～升小六</span>
+      </button>
     </div>
 
     <!-- 港墘 基礎 -->
     <div class="camp-panel on" id="panel-gang-basic">
       <div class="camp-list">
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch1')">
+          <div class="camp-main" onclick="togItem(this,'gang-basic-arch1')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/6 – 7/10</div>
@@ -190,7 +200,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">小小工程師的紙箱結構實戰！透過卡榫、三角形與Z字波浪的實踐，親手打造裝甲床板。從抗風防禦到耐震測試，在實測中掌握力學原理。</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch2')">
+          <div class="camp-main" onclick="togItem(this,'gang-basic-arch2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/13 – 7/17</div>
@@ -202,7 +212,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從身體量尺到家具佈局，學習測量空間比例與機能美學。透過模型屋實作與軟裝藝術，將靈感化為實體，在微縮設計中規劃理想生活！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch3')">
+          <div class="camp-main" onclick="togItem(this,'gang-basic-arch3')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/20 – 7/24</div>
@@ -214,7 +224,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">孩子們投入巨型紙箱屋工程，從結構健檢到軟裝佈置，親手打造安全避風港。並練習完整紀錄從無到有的築屋心路歷程！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'grow1')">
+          <div class="camp-main" onclick="togItem(this,'gang-basic-grow1')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/27 – 7/31</div>
@@ -226,7 +236,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從破冰氣氛到危機處理，策劃一場思維重組的活動！引導孩子用邏輯對抗變數，解鎖受用一生的專案管理超能力！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'grow2')">
+          <div class="camp-main" onclick="togItem(this,'gang-basic-grow2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/3 – 8/7</div>
@@ -238,7 +248,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">眼見不一定真實！透過視幻覺實驗，引導孩子在錯覺中重新定義觀察，培養不被表面迷惑的思考韌性！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'grow4')">
+          <div class="camp-main" onclick="togItem(this,'gang-basic-grow4')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/10 – 8/14</div>
@@ -250,7 +260,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">在平衡微調失誤、落點不可控的瞬間，學習平靜面對挫折。在反覆試錯中鍛鍊不輕言放棄的職人韌性！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'sci3')">
+          <div class="camp-main" onclick="togItem(this,'gang-basic-sci3')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/17 – 8/21</div>
@@ -262,7 +272,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從解密構造到花市探險！在配色與拓染的嘗試中，引導孩子細膩觀察，讓耐心與韌性像花朵般優雅綻放！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'sci2')">
+          <div class="camp-main" onclick="togItem(this,'gang-basic-sci2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/24 – 8/28</div>
@@ -280,7 +290,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
     <div class="camp-panel" id="panel-gang-adv">
       <div class="camp-list">
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch1')">
+          <div class="camp-main" onclick="togItem(this,'gang-adv-arch1')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/6 – 7/10</div>
@@ -292,7 +302,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">小小工程師的紙箱結構實戰！透過卡榫、三角形與Z字波浪的實踐，親手打造裝甲床板。從抗風防禦到耐震測試，在實測中掌握力學原理。</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch2')">
+          <div class="camp-main" onclick="togItem(this,'gang-adv-arch2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/13 – 7/17</div>
@@ -304,7 +314,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從身體量尺到家具佈局，學習測量空間比例與機能美學。透過模型屋實作與軟裝藝術，將靈感化為實體，在微縮設計中規劃理想生活！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch3')">
+          <div class="camp-main" onclick="togItem(this,'gang-adv-arch3')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/20 – 7/24</div>
@@ -316,7 +326,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">孩子們投入巨型紙箱屋工程，從結構健檢到軟裝佈置，親手打造安全避風港。並練習完整紀錄從無到有的築屋心路歷程！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'sci3')">
+          <div class="camp-main" onclick="togItem(this,'gang-adv-sci3')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/27 – 7/31</div>
@@ -328,7 +338,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從解密構造到花市探險！在配色與拓染的嘗試中，引導孩子細膩觀察，讓耐心與韌性像花朵般優雅綻放！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'sci2')">
+          <div class="camp-main" onclick="togItem(this,'gang-adv-sci2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/3 – 8/7</div>
@@ -340,7 +350,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從乾冰升華到雪花結晶，探索溫度的變化奧秘。在低溫模擬中動手實測浮力與保溫科學，並將冰雪轉化為美味與藝術！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'sci1')">
+          <div class="camp-main" onclick="togItem(this,'gang-adv-sci1')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/10 – 8/14</div>
@@ -352,7 +362,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從手心中的雨雲到地層過濾，解開地球水循環的秘密。透過毛細運輸與河海分界術實測液體魔力，解鎖清涼消暑的科學機制！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'grow2')">
+          <div class="camp-main" onclick="togItem(this,'gang-adv-grow2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/17 – 8/21</div>
@@ -364,7 +374,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">眼見不一定真實！透過視幻覺實驗，引導孩子在錯覺中重新定義觀察，培養不被表面迷惑的思考韌性！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'grow3')">
+          <div class="camp-main" onclick="togItem(this,'gang-adv-grow3')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/24 – 8/28</div>
@@ -382,7 +392,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
     <div class="camp-panel" id="panel-dazhi-basic">
       <div class="camp-list">
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'sci3')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-basic-sci3')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/6 – 7/10</div>
@@ -394,7 +404,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從解密構造到花市探險！在配色與拓染的嘗試中，引導孩子細膩觀察，讓耐心與韌性像花朵般優雅綻放！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'sci1')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-basic-sci1')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/13 – 7/17</div>
@@ -406,7 +416,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從手心中的雨雲到地層過濾，解開地球水循環的秘密。透過毛細運輸與河海分界術實測液體魔力，解鎖清涼消暑的科學機制！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch1')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-basic-arch1')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/20 – 7/24</div>
@@ -418,7 +428,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">小小工程師的紙箱結構實戰！透過卡榫、三角形與Z字波浪的實踐，親手打造裝甲床板。從抗風防禦到耐震測試，在實測中掌握力學原理。</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch2')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-basic-arch2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/27 – 7/31</div>
@@ -430,7 +440,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從身體量尺到家具佈局，學習測量空間比例與機能美學。透過模型屋實作與軟裝藝術，將靈感化為實體，在微縮設計中規劃理想生活！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch3')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-basic-arch3')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/3 – 8/7</div>
@@ -442,7 +452,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">孩子們投入巨型紙箱屋工程，從結構健檢到軟裝佈置，親手打造安全避風港。並練習完整紀錄從無到有的築屋心路歷程！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'sci2')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-basic-sci2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/10 – 8/14</div>
@@ -454,7 +464,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從乾冰升華到雪花結晶，探索溫度的變化奧秘。在低溫模擬中動手實測浮力與保溫科學，並將冰雪轉化為美味與藝術！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'grow3')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-basic-grow3')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/17 – 8/21</div>
@@ -466,7 +476,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">這不只是家事，更是大腦與韌性的挑戰！透過科學實驗與創意收納，讓每個小任務都成為獨立自理力的來源！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'grow2')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-basic-grow2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/24 – 8/28</div>
@@ -484,7 +494,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
     <div class="camp-panel" id="panel-dazhi-adv">
       <div class="camp-list">
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'grow1')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-adv-grow1')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/6 – 7/10</div>
@@ -496,7 +506,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從破冰氣氛到危機處理，策劃一場思維重組的活動！引導孩子用邏輯對抗變數，解鎖受用一生的專案管理超能力！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'sci3')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-adv-sci3')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/13 – 7/17</div>
@@ -508,7 +518,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從解密構造到花市探險！在配色與拓染的嘗試中，引導孩子細膩觀察，讓耐心與韌性像花朵般優雅綻放！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch1')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-adv-arch1')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/20 – 7/24</div>
@@ -520,7 +530,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">小小工程師的紙箱結構實戰！透過卡榫、三角形與Z字波浪的實踐，親手打造裝甲床板。從抗風防禦到耐震測試，在實測中掌握力學原理。</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch2')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-adv-arch2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">7/27 – 7/31</div>
@@ -532,7 +542,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從身體量尺到家具佈局，學習測量空間比例與機能美學。透過模型屋實作與軟裝藝術，將靈感化為實體，在微縮設計中規劃理想生活！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'arch3')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-adv-arch3')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/3 – 8/7</div>
@@ -544,7 +554,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">孩子們投入巨型紙箱屋工程，從結構健檢到軟裝佈置，親手打造安全避風港。並練習完整紀錄從無到有的築屋心路歷程！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'grow2')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-adv-grow2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/10 – 8/14</div>
@@ -556,7 +566,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">眼見不一定真實！透過視幻覺實驗，引導孩子在錯覺中重新定義觀察，培養不被表面迷惑的思考韌性！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'sci2')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-adv-sci2')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/17 – 8/21</div>
@@ -568,7 +578,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
           <div class="camp-desc">從乾冰升華到雪花結晶，探索溫度的變化奧秘。在低溫模擬中動手實測浮力與保溫科學，並將冰雪轉化為美味與藝術！</div>
         </div>
         <div class="camp-item">
-          <div class="camp-main" onclick="togItem(this,'grow4')">
+          <div class="camp-main" onclick="togItem(this,'dazhi-adv-grow4')">
             <div class="cbx"><div class="ctick"></div></div>
             <div class="crow-info">
               <div class="crow-date">8/24 – 8/28</div>
@@ -630,6 +640,7 @@ nav{background:#FFF8ED;border-bottom:2px solid var(--border);padding:12px 20px;t
 
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 var SC={
   arch1:{plan:3,expr:2,under:4,creat:2,act:5},
@@ -665,160 +676,208 @@ var TM={
   act:"實踐力強的孩子，是把想法變成現實的人。他不怕失敗，帶動整個團隊往前走。"
 };
 
-var curSchool="gang", curLv="basic";
-var sel={};
+// State
+var curSchool="gang";       // 目前基地：gang / dazhi
+var activeLv={basic:true, adv:false};  // 目前顯示的班別
+var sel={};                 // 已選的營隊，key = "gang-basic-arch1"
 var myChart=null;
 var prevPct={plan:0,expr:0,under:0,creat:0,act:0};
 
-function animateTo(from, to, duration){
-  var start=null;
-  var fromVals=KS.map(function(k){return from[k]||0;});
-  var toVals=KS.map(function(k){return to[k];});
-  function step(ts){
-    if(!start) start=ts;
-    var prog=Math.min((ts-start)/duration,1);
-    // easeInOutQuart
-    var e=prog<0.5?8*prog*prog*prog*prog:1-Math.pow(-2*prog+2,4)/2;
-    var cur=KS.map(function(k,i){return Math.round(fromVals[i]+(toVals[i]-fromVals[i])*e);});
-    if(myChart){
-      myChart.data.datasets[0].data=cur;
-      myChart.update("none"); // no chart.js animation, we control it
+// ── 切換基地（只能選一個，切換時清除選取）──
+function selSchool(s, el){
+  curSchool = s;
+  document.querySelectorAll(".stab").forEach(function(b){ b.classList.remove("on"); });
+  el.classList.add("on");
+  // 清除選取，避免跨基地混算
+  sel = {};
+  document.querySelectorAll(".camp-item").forEach(function(w){ w.classList.remove("on"); });
+  // 重置班別為基礎班
+  activeLv = {basic:true, adv:false};
+  document.getElementById("lb-basic").classList.add("on");
+  document.getElementById("lb-adv").classList.remove("on");
+  render();
+  showPanels();
+}
+
+// ── 切換班別（互斥，切換時清除選取）──
+function toggleLv(lv, el){
+  document.querySelectorAll(".ltab").forEach(function(b){ b.classList.remove("on"); });
+  el.classList.add("on");
+  activeLv = {basic:false, adv:false};
+  activeLv[lv] = true;
+  // 清除選取
+  sel = {};
+  document.querySelectorAll(".camp-item").forEach(function(w){ w.classList.remove("on"); });
+  updateCounts();
+  render();
+  showPanels();
+}
+
+// ── 顯示對應 panel ──
+function showPanels(){
+  document.querySelectorAll(".camp-panel").forEach(function(p){ p.classList.remove("on"); });
+  ["basic","adv"].forEach(function(lv){
+    if(!activeLv[lv]) return;
+    var p = document.getElementById("panel-"+curSchool+"-"+lv);
+    if(p){
+      p.classList.add("on");
+      // 同步勾選狀態
+      p.querySelectorAll(".camp-item").forEach(function(item){
+        var m = item.querySelector(".camp-main");
+        if(!m) return;
+        var oc = m.getAttribute("onclick") || "";
+        var match = oc.match(/togItem\(this,'([^']+)'\)/);
+        if(!match) return;
+        if(sel[match[1]]){ item.classList.add("on"); }
+        else { item.classList.remove("on"); }
+      });
     }
-    if(prog<1) requestAnimationFrame(step);
-    else updatePills(to);
+  });
+  updateCounts();
+}
+
+// ── 勾選 / 取消 營隊 ──
+function togItem(el, uid){
+  var item = el.closest ? el.closest(".camp-item") : el.parentElement;
+  if(sel[uid]){
+    delete sel[uid];
+    item.classList.remove("on");
+  } else {
+    sel[uid] = 1;
+    item.classList.add("on");
+  }
+  updateCounts();
+  render();
+}
+
+// ── 清除全部 ──
+function clearAll(){
+  sel = {};
+  document.querySelectorAll(".camp-item").forEach(function(w){ w.classList.remove("on"); });
+  updateCounts();
+  render();
+}
+
+// ── 展開介紹 ──
+function expandItem(btn){
+  var desc = btn.closest(".camp-item").querySelector(".camp-desc");
+  var open = !desc.classList.contains("open");
+  desc.classList.toggle("open", open);
+  btn.classList.toggle("open", open);
+  btn.textContent = open ? "−" : "+";
+}
+
+// ── 更新班別 count badge ──
+function updateCounts(){
+  ["basic","adv"].forEach(function(lv){
+    var n = 0;
+    Object.keys(sel).forEach(function(uid){
+      if(uid.indexOf(curSchool+"-"+lv+"-") === 0) n++;
+    });
+    var el = document.getElementById("cnt-"+lv);
+    if(el){
+      el.textContent = n;
+      el.classList.toggle("show", n > 0);
+    }
+  });
+}
+
+// ── 動畫累加 ──
+function animateTo(from, to, duration){
+  var start = null;
+  var fromV = KS.map(function(k){ return from[k]||0; });
+  var toV   = KS.map(function(k){ return to[k]; });
+  function step(ts){
+    if(!start) start = ts;
+    var prog = Math.min((ts-start)/duration, 1);
+    var e = prog<0.5 ? 8*prog*prog*prog*prog : 1-Math.pow(-2*prog+2,4)/2;
+    var cur = KS.map(function(k,i){ return Math.round(fromV[i]+(toV[i]-fromV[i])*e); });
+    if(myChart){ myChart.data.datasets[0].data = cur; myChart.update("none"); }
+    if(prog < 1){ requestAnimationFrame(step); }
+    else { updatePills(to); }
   }
   requestAnimationFrame(step);
 }
 
-function selSchool(s,el){
-  curSchool=s;
-  document.querySelectorAll(".stab").forEach(function(b){b.classList.remove("on");});
-  el.classList.add("on");
-  showPanel();
-}
-function selLv(lv,el){
-  curLv=lv;
-  document.querySelectorAll(".ltab").forEach(function(b){b.classList.remove("on");});
-  el.classList.add("on");
-  showPanel();
-}
-function showPanel(){
-  document.querySelectorAll(".camp-panel").forEach(function(p){p.classList.remove("on");});
-  var id="panel-"+curSchool+"-"+curLv;
-  var p=document.getElementById(id);
-  if(p){
-    p.classList.add("on");
-    // sync checkboxes
-    p.querySelectorAll(".camp-main").forEach(function(m){
-      var oc=m.getAttribute("onclick")||"";
-      var match=oc.match(/togItem\(this,'(\w+)'\)/);
-      if(!match) return;
-      var id=match[1];
-      var item=m.closest(".camp-item");
-      if(sel[id]){item.classList.add("on");}
-      else{item.classList.remove("on");}
-    });
-  }
-}
-function togItem(el, id){
-  var item = el.closest ? el.closest('.camp-item') : el.parentElement;
-  if(sel[id]){
-    delete sel[id];
-    item.classList.remove('on');
-  } else {
-    sel[id]=1;
-    item.classList.add('on');
-  }
-  render();
-}
-function expandItem(btn){
-  var desc=btn.closest('.camp-item').querySelector('.camp-desc');
-  var open=!desc.classList.contains('open');
-  desc.classList.toggle('open', open);
-  btn.classList.toggle('open', open);
-  btn.textContent=open?'−':'+';
-}
-
-function toggleDesc(uid, btn){
-  var el=document.getElementById("desc-"+uid);
-  if(!el) return;
-  var open=el.classList.toggle("open");
-  btn.textContent=open?"介紹▴":"介紹▾";
-}
-
-function clearAll(){
-  sel={};
-  document.querySelectorAll(".camp-item").forEach(function(w){w.classList.remove("on");});
-  render();
-}
+// ── 渲染雷達圖 ──
 function render(){
-  var ids=Object.keys(sel);
-  var emptyEl=document.getElementById("empty-msg");
-  var areaEl=document.getElementById("rr-area");
-  if(ids.length===0){
-    emptyEl.style.display="block"; areaEl.style.display="none";
-    if(myChart){myChart.destroy();myChart=null;}
-    prevPct={plan:0,expr:0,under:0,creat:0,act:0};
+  var ids = Object.keys(sel);
+  var emptyEl = document.getElementById("empty-msg");
+  var areaEl  = document.getElementById("rr-area");
+
+  if(ids.length === 0){
+    emptyEl.style.display = "block";
+    areaEl.style.display  = "none";
+    if(myChart){ myChart.destroy(); myChart = null; }
+    prevPct = {plan:0,expr:0,under:0,creat:0,act:0};
     return;
   }
-  emptyEl.style.display="none"; areaEl.style.display="block";
-  document.getElementById("rr-count").innerHTML="這個暑假參加了 <strong>"+ids.length+"</strong> 個營隊";
-  var tot={plan:0,expr:0,under:0,creat:0,act:0};
-  ids.forEach(function(id){KS.forEach(function(k){tot[k]+=SC[id][k];});});
-  // 暑假累積概念：基底30% + 累積70%，單選有形狀，全選接近滿
-  var panelId="panel-"+curSchool+"-"+curLv;
-  var totalCamps=document.getElementById(panelId)?document.getElementById(panelId).querySelectorAll(".camp-row").length:8;
-  var maxScore=totalCamps*4;
-  var pct={};
-  KS.forEach(function(k){pct[k]=Math.min(100,Math.round(tot[k]/(ids.length*5)*100));});
+
+  emptyEl.style.display = "none";
+  areaEl.style.display  = "block";
+  document.getElementById("rr-count").innerHTML = "這個暑假參加了 <strong>"+ids.length+"</strong> 個營隊";
+
+  // 計算分數：累加概念，分母=全班總週數×5（全勤滿分）
+  var tot = {plan:0,expr:0,under:0,creat:0,act:0};
+  ids.forEach(function(uid){
+    var parts = uid.split("-");
+    var ck = parts[parts.length-1];
+    if(SC[ck]) KS.forEach(function(k){ tot[k] += SC[ck][k]; });
   });
+  // 找當前 panel 的總營隊數作分母
+  var curLv = activeLv.basic ? "basic" : "adv";
+  var curPanel = document.getElementById("panel-"+curSchool+"-"+curLv);
+  var totalWeeks = curPanel ? curPanel.querySelectorAll(".camp-item").length : 8;
+  var pct = {};
+  KS.forEach(function(k){ pct[k] = Math.min(100, Math.round(tot[k]/(totalWeeks*5)*100)); });
 
   if(!myChart){
-    // 初次建立 chart，從 0 開始動畫到目標值
-    var ctx=document.getElementById("myChart").getContext("2d");
-    myChart=new Chart(ctx,{
+    var ctx = document.getElementById("myChart").getContext("2d");
+    myChart = new Chart(ctx, {
       type:"radar",
-      data:{labels:LB,datasets:[{
-        data:KS.map(function(k){return 0;}),
+      data:{labels:LB, datasets:[{
+        data: KS.map(function(){ return 0; }),
         backgroundColor:"rgba(74,144,189,0.15)",
-        borderColor:"#4A90BD",borderWidth:2.5,
-        pointBackgroundColor:KS.map(function(k){return CL[k].bar;}),
-        pointBorderColor:"#fff",pointBorderWidth:2,pointRadius:6,pointHoverRadius:8
+        borderColor:"#4A90BD", borderWidth:2.5,
+        pointBackgroundColor: KS.map(function(k){ return CL[k].bar; }),
+        pointBorderColor:"#fff", pointBorderWidth:2, pointRadius:6, pointHoverRadius:8
       }]},
-      options:{responsive:true,maintainAspectRatio:false,
-        animation:{duration:600,easing:"easeInOutQuart"},
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return" "+c.raw+"%";}}}},
-        scales:{r:{min:0,max:100,
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        animation:{duration:0},
+        plugins:{legend:{display:false}, tooltip:{callbacks:{label:function(c){return " "+c.raw+"%";}}}},
+        scales:{r:{min:0, max:100,
           ticks:{stepSize:25,font:{size:10},color:"#9A8060",backdropColor:"transparent"},
-          grid:{color:"rgba(0,0,0,.06)"},angleLines:{color:"rgba(0,0,0,.06)"},
+          grid:{color:"rgba(0,0,0,.06)"}, angleLines:{color:"rgba(0,0,0,.06)"},
           pointLabels:{font:{size:13,weight:"bold",family:"Noto Sans TC,sans-serif"},
-            color:KS.map(function(k){return CL[k].bar;})}
+            color:KS.map(function(k){ return CL[k].bar; })}
         }}
       }
     });
   }
-  // 用累加動畫更新數值：從 prevPct 漸漸到 pct
+
   animateTo(prevPct, pct, 500);
   prevPct = pct;
-  // pills and note updated after animation via updatePills
 }
 
 function updatePills(pct){
-  var ids=Object.keys(sel);
-  var sorted=KS.slice().sort(function(a,b){return pct[b]-pct[a];});
-  var pillsEl=document.getElementById("pills"); pillsEl.innerHTML="";
+  var ids = Object.keys(sel);
+  var sorted = KS.slice().sort(function(a,b){ return pct[b]-pct[a]; });
+  var pillsEl = document.getElementById("pills");
+  pillsEl.innerHTML = "";
   sorted.forEach(function(k,i){
-    var c=CL[k]; var idx=KS.indexOf(k);
-    var lb=i===0?" · 暑假最強培養":i===1?" · 次要成長":"";
-    var p=document.createElement("span"); p.className="pill";
-    p.style.background=c.bg; p.style.color=c.tx;
-    p.textContent=LB[idx]+" "+pct[k]+"%"+lb; pillsEl.appendChild(p);
+    var c = CL[k]; var idx = KS.indexOf(k);
+    var lb = i===0?" · 暑假最強培養":i===1?" · 次要成長":"";
+    var p = document.createElement("span");
+    p.className = "pill"; p.style.background = c.bg; p.style.color = c.tx;
+    p.textContent = LB[idx]+" "+pct[k]+"%"+lb;
+    pillsEl.appendChild(p);
   });
-  var noteEl=document.getElementById("team-note");
-  if(ids.length>=6){
-    noteEl.textContent="整個暑假參加了這麼多營隊，五力培養越來越全面均衡——這就是綻藍教育最在意的事：不只是一週的成長，而是整個暑假在不同的團隊角色中，一點一點長出屬於自己的能力。";
+  var noteEl = document.getElementById("team-note");
+  if(ids.length >= 6){
+    noteEl.textContent = "整個暑假參加了這麼多營隊，五力培養越來越全面均衡——在不同的團隊角色中，一點一點長出屬於自己的能力。這正是綻藍教育最在意的：在團隊裡，一起長大。";
   } else {
-    noteEl.textContent="這週孩子在團隊任務裡，"+TM[sorted[0]]+"再加入更多不同主題的營隊，整個暑假的五力培養會更全面，孩子也能在不同角色中找到自己的天賦。";
+    noteEl.textContent = "這週孩子在團隊任務裡，"+TM[sorted[0]]+"再加入更多不同主題的營隊，整個暑假的五力培養會更全面！";
   }
 }
 </script>
